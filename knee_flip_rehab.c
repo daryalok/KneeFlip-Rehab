@@ -261,7 +261,7 @@ static void knee_flip_draw_simple_timer(Canvas* canvas, const KneeFlipSimpleTime
 
     canvas_set_font(canvas, FontPrimary);
     canvas_draw_str(canvas, 2, 12, timer->title ? timer->title : "Timer");
-    canvas_set_font(canvas, FontBigNumbers);
+    canvas_set_font(canvas, FontPrimary);
     canvas_draw_str_aligned(canvas, 64, 38, AlignCenter, AlignBottom, remaining);
 
     canvas_set_font(canvas, FontSecondary);
@@ -306,7 +306,7 @@ static void knee_flip_draw_quad_timer(Canvas* canvas, const KneeFlipQuadTimer* t
     canvas_draw_str(canvas, 2, 12, "Quad Sets");
     canvas_draw_str_aligned(canvas, 126, 12, AlignRight, AlignBottom, rep_text);
 
-    canvas_set_font(canvas, FontBigNumbers);
+    canvas_set_font(canvas, FontPrimary);
     canvas_draw_str_aligned(canvas, 64, 38, AlignCenter, AlignBottom, phase);
     canvas_set_font(canvas, FontSecondary);
     if(timer->cancelled) {
@@ -338,7 +338,7 @@ static void knee_flip_draw_heel_counter(Canvas* canvas, const KneeFlipHeelCounte
 
     canvas_set_font(canvas, FontPrimary);
     canvas_draw_str(canvas, 2, 12, "Heel Slides");
-    canvas_set_font(canvas, FontBigNumbers);
+    canvas_set_font(canvas, FontPrimary);
     canvas_draw_str_aligned(canvas, 64, 38, AlignCenter, AlignBottom, rep_text);
     canvas_set_font(canvas, FontSecondary);
     canvas_draw_str_aligned(
