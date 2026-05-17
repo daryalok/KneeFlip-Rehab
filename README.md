@@ -1,5 +1,15 @@
 # KneeFlip Rehab
 
+```text
+          .-.
+         /'v'\
+        (/   \)
+      ='="="=
+
+     K N E E F L I P
+       R E H A B
+```
+
 KneeFlip Rehab is a Flipper Zero external FAP app for following knee rehabilitation routines prescribed by a clinician.
 
 It is a small timer and journaling tool: a place to start recovery timers, keep simple session notes, and eventually export plain CSV logs from the Flipper Zero microSD card.
@@ -8,22 +18,29 @@ It is a small timer and journaling tool: a place to start recovery timers, keep 
 
 ## Current status
 
-This repository currently contains the first minimal buildable app skeleton:
+This repository currently contains the first working app build:
 
 - `application.fam` app metadata
 - main app entry point
 - main menu
 - About screen with the required disclaimer
-- placeholder screens for the planned rehab flows
+- Ice and elevation timers with start, pause, resume, cancel, and completion states
+- Quad sets hold/rest timer for clinician-prescribed routines
+- Heel slides manual counter
 
-Timers, journaling inputs, CSV export, and history are planned next, after the skeleton builds cleanly.
+Journaling inputs, CSV export, and history are planned next.
 
 ## Planned features
+
+Implemented:
 
 - Ice timer
 - Elevation timer
 - Quad sets timer
 - Heel slides counter
+
+Planned:
+
 - Pain before/after input, 0-10
 - Swelling input: none, mild, moderate, severe
 - Manual range-of-motion input in degrees

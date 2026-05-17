@@ -8,6 +8,6 @@ App(
     fap_version="0.1.0",
     fap_weburl="https://github.com/daryalok/KneeFlip-Rehab",
     name="KneeFlip Rehab",
-    requires=["gui"],
+    requires=["gui", "notification"],
     stack_size=4 * 1024,
 )
