@@ -156,6 +156,18 @@ static void knee_flip_return_to_menu(KneeFlipApp* app) {
     view_dispatcher_switch_to_view(app->view_dispatcher, KneeFlipViewMenu);
 }
 
+static void knee_flip_refresh_block_view(KneeFlipApp* app) {
+    if(!app || !app->block_view) {
+        return;
+    }
+
+    KneeFlipApp** block_model = view_get_model(app->block_view);
+    if(block_model) {
+        *block_model = app;
+        view_commit_model(app->block_view, true);
+    }
+}
+
 static void knee_flip_show_text(KneeFlipApp* app, const char* text) {
     furi_assert(app);
     furi_assert(text);
@@ -459,7 +471,7 @@ static bool knee_flip_block_input_callback(InputEvent* event, void* context) {
         knee_flip_return_to_menu(app);
     }
 
-    view_commit_model(app->block_view, true);
+    knee_flip_refresh_block_view(app);
     return true;
 }
 
@@ -523,7 +535,7 @@ static void knee_flip_tick_callback(void* context) {
         knee_flip_tick_quad_timer(app);
     }
 
-    view_commit_model(app->block_view, true);
+    knee_flip_refresh_block_view(app);
 }
 
 static bool knee_flip_navigation_callback(void* context) {
@@ -539,7 +551,7 @@ static bool knee_flip_navigation_callback(void* context) {
     if(app->showing_block) {
         knee_flip_cancel_active_block(app);
         if(app->active_block != KneeFlipBlockHeelCounter) {
-            view_commit_model(app->block_view, true);
+            knee_flip_refresh_block_view(app);
         }
         return true;
     }
