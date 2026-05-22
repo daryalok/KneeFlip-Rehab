@@ -7,6 +7,7 @@
 #include <notification/notification_messages.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 #define KNEE_FLIP_SIMPLE_TIMER_SECONDS (20U * 60U)
 #define KNEE_FLIP_QUAD_HOLD_SECONDS    5U
@@ -262,6 +263,135 @@ static void
     }
 }
 
+static uint8_t knee_flip_timer_progress_stage(const KneeFlipSimpleTimer* timer) {
+    furi_assert(timer);
+
+    if(timer->completed || timer->remaining_seconds == 0) {
+        return 5;
+    }
+    if(timer->duration_seconds == 0) {
+        return 1;
+    }
+
+    uint32_t elapsed = timer->duration_seconds - timer->remaining_seconds;
+    uint32_t percent = (elapsed * 100U) / timer->duration_seconds;
+    if(percent < 25U) {
+        return 1;
+    } else if(percent < 50U) {
+        return 2;
+    } else if(percent < 75U) {
+        return 3;
+    }
+    return 4;
+}
+
+static void knee_flip_draw_penguin(Canvas* canvas, int32_t x, int32_t y) {
+    furi_assert(canvas);
+
+    canvas_draw_circle(canvas, x, y, 6);
+    canvas_draw_dot(canvas, x - 2, y - 1);
+    canvas_draw_dot(canvas, x + 2, y - 1);
+    canvas_draw_line(canvas, x - 2, y + 2, x, y + 4);
+    canvas_draw_line(canvas, x + 2, y + 2, x, y + 4);
+    canvas_draw_line(canvas, x - 8, y + 8, x - 3, y + 14);
+    canvas_draw_line(canvas, x + 8, y + 8, x + 3, y + 14);
+    canvas_draw_line(canvas, x - 5, y + 17, x + 5, y + 17);
+    canvas_draw_line(canvas, x - 8, y + 19, x - 1, y + 19);
+    canvas_draw_line(canvas, x + 1, y + 19, x + 8, y + 19);
+}
+
+static void knee_flip_draw_ice_block(Canvas* canvas, uint8_t stage) {
+    furi_assert(canvas);
+
+    canvas_draw_frame(canvas, 6, 15, 52, 28);
+    canvas_draw_line(canvas, 10, 15, 15, 10);
+    canvas_draw_line(canvas, 15, 10, 49, 10);
+    canvas_draw_line(canvas, 49, 10, 58, 15);
+    canvas_draw_line(canvas, 10, 43, 15, 48);
+    canvas_draw_line(canvas, 15, 48, 49, 48);
+    canvas_draw_line(canvas, 49, 48, 58, 43);
+
+    for(uint8_t i = 0; i < 6; i++) {
+        canvas_draw_dot(canvas, 14 + (i * 7), 20 + ((i % 2) * 6));
+        canvas_draw_dot(canvas, 12 + (i * 7), 35 - ((i % 2) * 5));
+    }
+
+    if(stage >= 2) {
+        canvas_draw_line(canvas, 29, 15, 24, 24);
+        canvas_draw_line(canvas, 24, 24, 31, 30);
+        canvas_draw_line(canvas, 35, 11, 31, 20);
+    }
+    if(stage >= 3) {
+        canvas_draw_box(canvas, 24, 20, 16, 15);
+        canvas_set_color(canvas, ColorWhite);
+        canvas_draw_box(canvas, 25, 21, 14, 13);
+        canvas_set_color(canvas, ColorBlack);
+        canvas_draw_line(canvas, 42, 22, 49, 18);
+        canvas_draw_line(canvas, 17, 38, 25, 42);
+    }
+    if(stage >= 4) {
+        canvas_set_color(canvas, ColorWhite);
+        canvas_draw_box(canvas, 18, 16, 30, 24);
+        canvas_set_color(canvas, ColorBlack);
+        canvas_draw_line(canvas, 8, 43, 55, 43);
+        canvas_draw_line(canvas, 14, 48, 50, 48);
+    }
+}
+
+static void knee_flip_draw_ice_timer(Canvas* canvas, const KneeFlipSimpleTimer* timer) {
+    char remaining[16];
+    const char* status = "OK Start";
+    uint8_t stage = knee_flip_timer_progress_stage(timer);
+
+    furi_assert(canvas);
+    furi_assert(timer);
+
+    knee_flip_format_mm_ss(remaining, sizeof(remaining), timer->remaining_seconds);
+
+    canvas_set_font(canvas, FontPrimary);
+    canvas_draw_str(canvas, 2, 8, "Ice Timer");
+
+    if(stage < 5) {
+        knee_flip_draw_ice_block(canvas, stage);
+        int32_t penguin_y = 27;
+        if(stage == 2) {
+            penguin_y = 24;
+        } else if(stage == 3) {
+            penguin_y = 19;
+        } else if(stage == 4) {
+            penguin_y = 12;
+        }
+        knee_flip_draw_penguin(canvas, 32, penguin_y);
+    } else {
+        knee_flip_draw_penguin(canvas, 32, 13);
+        canvas_set_font(canvas, FontPrimary);
+        canvas_draw_str(canvas, 73, 32, "DONE");
+    }
+
+    canvas_set_font(canvas, FontPrimary);
+    canvas_draw_str(canvas, 74, 18, "ICE");
+    canvas_draw_str(canvas, 74, 32, remaining);
+    canvas_set_font(canvas, FontSecondary);
+
+    if(timer->completed) {
+        canvas_draw_str(canvas, 74, 45, "Complete");
+        status = "OK Menu";
+    } else if(timer->cancelled) {
+        canvas_draw_str(canvas, 74, 45, "Cancelled");
+        status = "OK Menu";
+    } else if(timer->paused) {
+        canvas_draw_str(canvas, 74, 45, "Paused");
+        status = "OK Resume";
+    } else if(timer->running) {
+        canvas_draw_str(canvas, 74, 45, "Running");
+        status = "OK Pause";
+    } else {
+        canvas_draw_str(canvas, 74, 45, "Clinician plan");
+    }
+
+    knee_flip_draw_footer(canvas, "Back", status, NULL);
+}
+
 static void knee_flip_draw_simple_timer(Canvas* canvas, const KneeFlipSimpleTimer* timer) {
     char remaining[16];
     const char* status = "OK Start";
@@ -270,6 +400,11 @@ static void knee_flip_draw_simple_timer(Canvas* canvas, const KneeFlipSimpleTime
     furi_assert(timer);
 
     knee_flip_format_mm_ss(remaining, sizeof(remaining), timer->remaining_seconds);
+
+    if(timer->title && strcmp(timer->title, "Ice Timer") == 0) {
+        knee_flip_draw_ice_timer(canvas, timer);
+        return;
+    }
 
     canvas_set_font(canvas, FontPrimary);
     canvas_draw_str(canvas, 2, 12, timer->title ? timer->title : "Timer");
