@@ -9,7 +9,7 @@
 - [x] application.fam valid
 - [x] App builds with uFBT
 - [x] Icon is 10x10px 1-bit PNG
-- [ ] qFlipper screenshots present
+- [x] qFlipper screenshots present
 - [ ] manifest.yml valid in flipper-application-catalog
 - [x] No medical advice claims
 - [x] No illegal or harmful behavior
@@ -19,5 +19,5 @@
 ## Current Blockers
 
 - Replace `REPLACE_WITH_FULL_COMMIT_SHA` in `docs/catalog/manifest.yml` after the final source commit.
-- Capture real qFlipper screenshots and place them under `screenshots/`.
+- Optional but recommended: add About/disclaimer and session summary screenshots when those screens are ready.
 - Validate the manifest in a local clone of `flipperdevices/flipper-application-catalog`.
