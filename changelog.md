@@ -4,7 +4,7 @@
 
 Initial prototype.
 
-### Added
+**Added**
 
 - Main menu
 - Ice timer
