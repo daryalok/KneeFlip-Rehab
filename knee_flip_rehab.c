@@ -92,6 +92,7 @@ typedef struct {
     bool showing_text;
     bool showing_block;
     bool views_added;
+    bool block_model_allocated;
 } KneeFlipApp;
 
 static void knee_flip_notify(NotificationApp* notification, const NotificationSequence* sequence) {
@@ -711,6 +712,7 @@ static KneeFlipApp* knee_flip_app_alloc(void) {
     app->showing_text = false;
     app->showing_block = false;
     app->views_added = false;
+    app->block_model_allocated = false;
     knee_flip_reset_simple_timer(&app->simple_timer, "Timer", KNEE_FLIP_SIMPLE_TIMER_SECONDS);
     knee_flip_reset_quad_timer(&app->quad_timer);
     knee_flip_reset_heel_counter(&app->heel_counter);
@@ -733,6 +735,7 @@ static KneeFlipApp* knee_flip_app_alloc(void) {
 
     view_set_context(app->block_view, app);
     view_allocate_model(app->block_view, ViewModelTypeLocking, sizeof(KneeFlipApp*));
+    app->block_model_allocated = true;
     KneeFlipApp** block_model = view_get_model(app->block_view);
     if(block_model) {
         *block_model = app;
@@ -775,7 +778,9 @@ static void knee_flip_app_free(KneeFlipApp* app) {
     }
 
     if(app->block_view) {
-        view_free_model(app->block_view);
+        if(app->block_model_allocated) {
+            view_free_model(app->block_view);
+        }
         view_free(app->block_view);
     }
 

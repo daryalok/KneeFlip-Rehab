@@ -1,15 +1,23 @@
 # Flipper Catalog PR Checklist
 
-- [ ] Public GitHub repo created
-- [ ] LICENSE present
-- [ ] README complete
-- [ ] changelog.md complete
-- [ ] application.fam valid
-- [ ] App builds with uFBT
-- [ ] Screenshots captured with qFlipper
-- [ ] Catalog manifest created
-- [ ] `sourcecode.location.origin` updated
-- [ ] `sourcecode.location.commit_sha` updated
-- [ ] Medical disclaimer present
-- [ ] No medical advice or treatment claims
-- [ ] PR opened to `flipperdevices/flipper-application-catalog` under `applications/Tools/kneeflip_rehab/manifest.yml`
+- [x] Public GitHub repo exists
+- [ ] Source code committed
+- [ ] Full commit SHA copied into manifest.yml
+- [x] LICENSE present
+- [x] README.md present
+- [x] changelog.md present
+- [x] application.fam valid
+- [x] App builds with uFBT
+- [x] Icon is 10x10px 1-bit PNG
+- [ ] qFlipper screenshots present
+- [ ] manifest.yml valid in flipper-application-catalog
+- [x] No medical advice claims
+- [x] No illegal or harmful behavior
+- [x] PR path is `applications/Tools/kneeflip_rehab/manifest.yml`
+- [ ] PR branch name follows recommended format: `<username>/kneeflip_rehab_0.1`
+
+## Current Blockers
+
+- Replace `REPLACE_WITH_FULL_COMMIT_SHA` in `docs/catalog/manifest.yml` after the final source commit.
+- Capture real qFlipper screenshots and place them under `screenshots/`.
+- Validate the manifest in a local clone of `flipperdevices/flipper-application-catalog`.

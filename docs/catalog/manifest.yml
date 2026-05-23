@@ -11,8 +11,8 @@
 sourcecode:
   type: git
   location:
-    origin: https://github.com/YOUR_GITHUB_USERNAME/kneeflip-rehab.git
-    commit_sha: REPLACE_WITH_COMMIT_SHA
+    origin: https://github.com/daryalok/KneeFlip-Rehab.git
+    commit_sha: REPLACE_WITH_FULL_COMMIT_SHA
 
 id: kneeflip_rehab
 name: KneeFlip Rehab
