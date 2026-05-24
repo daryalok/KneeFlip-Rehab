@@ -20,7 +20,7 @@ category: Tools
 version: "0.1"
 author: Darya Lok
 icon: icons/kneeflip_rehab_10px.png
-short_description: Timer and journal for prescribed knee rehab routines
+short_description: Timer and counter for prescribed knee rehab routines
 description: "@README.md"
 changelog: "@changelog.md"
 screenshots:

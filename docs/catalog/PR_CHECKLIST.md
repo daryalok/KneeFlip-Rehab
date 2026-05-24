@@ -19,5 +19,5 @@
 ## Current Blockers
 
 - Replace `REPLACE_WITH_FULL_COMMIT_SHA` in `docs/catalog/manifest.yml` after the final source commit.
-- Optional but recommended: add About/disclaimer and session summary screenshots when those screens are ready.
+- Optional but recommended: add an About/disclaimer screenshot when that screen is ready.
 - Validate the manifest in a local clone of `flipperdevices/flipper-application-catalog`.

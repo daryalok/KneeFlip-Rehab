@@ -12,9 +12,9 @@
         R E H A B
 ```
 
-KneeFlip Rehab is a Flipper Zero external FAP app for clinician-prescribed knee rehabilitation routines. It is a small timer and journaling tool for following timed sessions, pacing user-configured exercise blocks, logging pain and swelling, recording range-of-motion progress, and exporting recovery notes as CSV.
+KneeFlip Rehab is a Flipper Zero external FAP app for clinician-prescribed knee rehabilitation routines. It is a small timer and counter tool for following timed sessions and pacing user-configured exercise blocks.
 
-> **Safety disclaimer:** KneeFlip Rehab is a timer and journaling tool only. It does not provide medical advice, diagnosis, or treatment. Always follow the recovery plan provided by your doctor, surgeon, or physical therapist.
+> **Safety disclaimer:** KneeFlip Rehab is a timer and counter tool only. It does not provide medical advice, diagnosis, or treatment. Always follow the recovery plan provided by your doctor, surgeon, or physical therapist.
 
 ## Features
 
@@ -22,11 +22,6 @@ KneeFlip Rehab is a Flipper Zero external FAP app for clinician-prescribed knee 
 - Elevation timer
 - Quad sets timer for clinician-prescribed routines
 - Heel slides manual counter
-- Pain before/after log
-- Swelling log
-- Manual ROM input
-- CSV export to microSD
-- History screen
 - Optional future GPIO sensor support
 
 ## App Screens
@@ -40,40 +35,12 @@ Implemented:
 - Heel slides counter
 - About screen with safety disclaimer
 
-Planned:
-
-- Pain before/after input
-- Swelling input
-- Manual ROM input
-- Session summary
-- CSV export
-- Recovery history
-
 Screenshot placeholders:
 
 - `screenshots/main-menu.png`
 - `screenshots/ice-timer.png`
 - `screenshots/quad-sets.png`
-- `screenshots/session-summary.png`
 - `screenshots/about.png`
-
-## Data Export
-
-KneeFlip Rehab is planned to write append-only CSV logs to the Flipper Zero microSD card. The data format should stay plain, readable, and easy to copy into a note, spreadsheet, or message for a clinician.
-
-Example CSV shape:
-
-```csv
-timestamp,session_type,pain_before,pain_after,swelling,rom_degrees,notes
-2026-05-22T12:00:00Z,ice,3,3,mild,,completed timer
-2026-05-22T12:30:00Z,quad_sets,2,3,mild,85,user-entered routine
-```
-
-If pain after a session is much higher than pain before, the app should only show this neutral reminder:
-
-```text
-Pain increased. Stop the session and follow your clinician's instructions.
-```
 
 ## Installation
 
@@ -109,19 +76,13 @@ ufbt
 
 ## Development Status
 
-KneeFlip Rehab is an early prototype. Timer-based blocks are being implemented first, followed by journaling, CSV export, and recovery history.
+KneeFlip Rehab currently focuses on timer-based blocks and a manual heel slides counter.
 
 Current version: `0.1.0`
 
 ## Roadmap
 
 - Stabilize timer screens on hardware
-- Add pain before/after input
-- Add swelling input
-- Add manual ROM input
-- Add session summary
-- Add append-only CSV export
-- Add recent session history
 - Capture official qFlipper screenshots
 - Prepare Flipper Application Catalog PR
 - Explore optional GPIO sensor support without automatic medical interpretation
@@ -132,7 +93,7 @@ Current version: `0.1.0`
 - The app does not prescribe timing, repetitions, or recovery plans.
 - The app does not diagnose, treat, prevent, or cure medical conditions.
 - Exercise labels are timers/counters for routines already provided by a clinician.
-- Do not include private medical data in public bug reports, screenshots, logs, or pull requests.
+- Do not include private medical data in public bug reports, screenshots, or pull requests.
 
 ## Catalog Submission
 

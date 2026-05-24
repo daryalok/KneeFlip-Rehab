@@ -4,11 +4,11 @@
 
 Please report security, privacy, or safety issues through GitHub issues or by contacting the project maintainer directly if a private channel is available.
 
-If the issue involves sensitive information, do not include private medical data, recovery logs, screenshots with personal details, or identifiable health information in a public report.
+If the issue involves sensitive information, do not include private medical data, screenshots with personal details, or identifiable health information in a public report.
 
 ## Safety Scope
 
-KneeFlip Rehab is a timer and journaling tool only. It does not provide medical advice, diagnosis, or treatment.
+KneeFlip Rehab is a timer and counter tool only. It does not provide medical advice, diagnosis, or treatment.
 
 Please report any wording, feature, or behavior that could be interpreted as:
 

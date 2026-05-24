@@ -13,7 +13,6 @@ Current screenshots:
 
 Recommended additional screenshots:
 
-- Session summary
 - About/disclaimer screen
 
 Suggested placeholder filenames:
@@ -22,5 +21,4 @@ Suggested placeholder filenames:
 - `ice-timer.png`
 - `elevation-timer.png`
 - `quad-sets.png`
-- `session-summary.png`
 - `about.png`

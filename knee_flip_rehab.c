@@ -15,11 +15,11 @@
 #define KNEE_FLIP_QUAD_REPS            10U
 #define KNEE_FLIP_HEEL_REPS            10U
 
-#define KNEE_FLIP_DISCLAIMER                         \
-    "KneeFlip Rehab is a timer and journaling tool " \
-    "only. It does not provide medical advice, "     \
-    "diagnosis, or treatment. Always follow the "    \
-    "recovery plan provided by your doctor, "        \
+#define KNEE_FLIP_DISCLAIMER                      \
+    "KneeFlip Rehab is a timer and counter tool " \
+    "only. It does not provide medical advice, "  \
+    "diagnosis, or treatment. Always follow the " \
+    "recovery plan provided by your doctor, "     \
     "surgeon, or physical therapist."
 
 typedef enum {
@@ -33,8 +33,6 @@ typedef enum {
     KneeFlipMenuElevationTimer,
     KneeFlipMenuQuadSets,
     KneeFlipMenuHeelSlides,
-    KneeFlipMenuPainLog,
-    KneeFlipMenuHistory,
     KneeFlipMenuAbout,
 } KneeFlipMenuItem;
 
@@ -232,12 +230,6 @@ static void knee_flip_menu_callback(void* context, uint32_t index) {
     case KneeFlipMenuHeelSlides:
         knee_flip_reset_heel_counter(&app->heel_counter);
         knee_flip_show_block(app, KneeFlipBlockHeelCounter);
-        break;
-    case KneeFlipMenuPainLog:
-        knee_flip_show_text(app, "Pain Log\n\n0-10 before/after input will be added next.");
-        break;
-    case KneeFlipMenuHistory:
-        knee_flip_show_text(app, "History\n\nNo sessions saved yet.");
         break;
     case KneeFlipMenuAbout:
         knee_flip_show_text(app, "KneeFlip Rehab\n\n" KNEE_FLIP_DISCLAIMER);
@@ -750,8 +742,6 @@ static KneeFlipApp* knee_flip_app_alloc(void) {
     submenu_add_item(app->menu, "Quad Sets", KneeFlipMenuQuadSets, knee_flip_menu_callback, app);
     submenu_add_item(
         app->menu, "Heel Slides", KneeFlipMenuHeelSlides, knee_flip_menu_callback, app);
-    submenu_add_item(app->menu, "Pain Log", KneeFlipMenuPainLog, knee_flip_menu_callback, app);
-    submenu_add_item(app->menu, "History", KneeFlipMenuHistory, knee_flip_menu_callback, app);
     submenu_add_item(app->menu, "About", KneeFlipMenuAbout, knee_flip_menu_callback, app);
 
     view_dispatcher_add_view(app->view_dispatcher, KneeFlipViewMenu, submenu_get_view(app->menu));

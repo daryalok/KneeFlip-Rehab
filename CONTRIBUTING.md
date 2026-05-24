@@ -36,7 +36,7 @@ When hardware is available, manually check:
 
 ## Medical Wording Safety
 
-KneeFlip Rehab is a timer and journaling tool only. Contributions must not add:
+KneeFlip Rehab is a timer and counter tool only. Contributions must not add:
 
 - Medical recommendations
 - Diagnosis logic
@@ -44,11 +44,11 @@ KneeFlip Rehab is a timer and journaling tool only. Contributions must not add:
 - Automated exercise prescriptions
 - Claims that the app treats, prevents, cures, or diagnoses any condition
 
-Use neutral wording such as "timer", "counter", "journal", "clinician-prescribed routine", and "follow your clinician's instructions".
+Use neutral wording such as "timer", "counter", "clinician-prescribed routine", and "follow your clinician's instructions".
 
 ## Issues
 
-Open GitHub issues for bugs, build problems, UI problems, catalog metadata updates, or safety wording concerns. Do not include private medical information, personal recovery logs, or identifiable health data in public issues.
+Open GitHub issues for bugs, build problems, UI problems, catalog metadata updates, or safety wording concerns. Do not include private medical information or identifiable health data in public issues.
 
 ## Pull Requests
 

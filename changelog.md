@@ -12,5 +12,4 @@ Initial prototype.
 - Quad sets timer
 - Heel slides counter
 - About screen with safety disclaimer
-- Planned CSV recovery log structure
 - GitHub and catalog metadata
